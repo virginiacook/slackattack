@@ -63,7 +63,7 @@ controller.hears(['hungry'], ['direct_message', 'direct_mention', 'mention'], (b
 controller.hears(['hello', 'hi', 'hey', 'howdy'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
   bot.api.users.info({ user: message.user }, (err, res) => {
     if (res) {
-      bot.reply(message, `Hello, ${res.user.first_name}!`);
+      bot.reply(message, `Hello, ${res.user.profile.first_name}!`);
     } else {
       bot.reply(message, 'Hello there!');
     }
