@@ -93,4 +93,5 @@ controller.on('direct_message', (bot, message) => {
 // });
 controller.on('outgoing_webhook', (bot, message) => {
   bot.replyPublic(message, 'yeah yeah');
+  bot.reply(message, 'yeah yeah');
 });
