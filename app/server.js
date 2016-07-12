@@ -60,24 +60,16 @@ controller.hears(['hungry'], ['direct_message', 'direct_mention', 'mention'], (b
         });
       });
 });
-controller.hears(['hello', 'hi', 'howdy'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
+controller.hears(['hello', 'hi', 'hey', 'howdy'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
   bot.api.users.info({ user: message.user }, (err, res) => {
     if (res) {
-      bot.reply(message, `Hello, ${res.user.name}!`);
+      bot.reply(message, `Hello, ${res.user.first_name}!`);
     } else {
       bot.reply(message, 'Hello there!');
     }
   });
 });
 
-
-controller.hears('open the (.*) doors', ['message_received'], (bot, message) => {
-  const doorType = message.match[1]; // match[1] is the (.*) group. match[0] is the entire group (open the (.*) doors).
-  if (doorType === 'pod bay') {
-    bot.reply(message, 'I\'m sorry, Dave. I\'m afraid I can\'t do that.');
-  }
-  return bot.reply(message, 'Okay');
-});
 // reply to a direct mention - @bot hello
 controller.on('direct_mention', (bot, message) => {
   // reply to _message_ by using the _bot_ object
