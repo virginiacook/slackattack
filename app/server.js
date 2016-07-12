@@ -33,11 +33,11 @@ const slackbot = controller.spawn({
 
 // prepare webhook
 // for now we won't use this but feel free to look up slack webhooks
-// controller.setupWebserver(process.env.PORT || 3001, (err, webserver) => {
-//   controller.createWebhookEndpoints(webserver, slackbot, () => {
-//     if (err) { throw new Error(err); }
-//   });
-// });
+controller.setupWebserver(process.env.PORT || 3001, (err, webserver) => {
+  controller.createWebhookEndpoints(webserver, slackbot, () => {
+    if (err) { throw new Error(err); }
+  });
+});
 // example hello response
 controller.hears(['hungry'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
   yelp.search({ term: 'food', location: '03755' })
@@ -69,6 +69,11 @@ controller.hears(['hello', 'hi', 'hey', 'howdy'], ['direct_message', 'direct_men
     }
   });
 });
+controller.hears(['help'], ['direct_message'], (bot, message) => {
+  bot.api.users.info({ user: message.user }, (err, res) => {
+    bot.reply(message, 'Tell me you\'re hungry and I\'ll tell you where to eat!');
+  });
+});
 // reply to a direct mention - @bot hello
 controller.on('direct_mention', (bot, message) => {
   // reply to _message_ by using the _bot_ object
@@ -80,7 +85,7 @@ controller.on('direct_message', (bot, message) => {
   bot.reply(message, 'Thank you for talking to me!');
 });
 controller.on('message_received', (bot, message) => {
-  bot.reply(message, 'Tell me you\'re hungry and I\'ll tell you where to eat!');
+  bot.reply(message, 'What are you talking about? Tell me you\'re hungry and I\'ll tell you where to eat!');
 });
 controller.on('outgoing_webhook', (bot, message) => {
   bot.replyPublic(message, 'yeah yeah');
