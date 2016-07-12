@@ -88,6 +88,6 @@ controller.on('direct_message', (bot, message) => {
 //   bot.reply(message, 'What are you talking about? Tell me you\'re hungry and I\'ll tell you where to eat!');
 // });
 controller.on('outgoing_webhook', (bot, message) => {
-  bot.replyPublic(message, 'yeah yeah');
-  bot.reply(message, 'yeah yeah');
+  bot.replyPublic(message, 'Good morning!');
+  bot.reply(message, 'Good morning!');
 });
