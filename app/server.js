@@ -38,6 +38,28 @@ controller.setupWebserver(process.env.PORT || 3001, (err, webserver) => {
   });
 });
 
+controller.hears(['pizza'], 'message_recieved', (bot, message) => {
+  convo.ask('What is your location?', (response, convo) => {
+    convo.say('Okay going to get your ${response}');
+        // askSize(response, convo);
+    convo.next();
+  });
+  /*  askSize = function(response, convo) {
+      convo.ask('What size do you want?', function(response, convo) {
+        convo.say('Ok.')
+        askWhereDeliver(response, convo);
+        convo.next();
+      });
+    }
+    askWhereDeliver = function(response, convo) {
+      convo.ask('So where do you want it delivered?', function(response, convo) {
+        convo.say('Ok! Good bye.');
+        convo.next();
+      });
+    }*/
+});
+
+
 // response for food
 controller.hears(['hungry'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
   yelp.search({ term: 'food', location: '03755' })
