@@ -82,11 +82,11 @@ controller.on('direct_mention', (bot, message) => {
 // reply to a direct message
 controller.on('direct_message', (bot, message) => {
   // reply to _message_ by using the _bot_ object
-  bot.reply(message, 'Thank you for talking to me!');
-});
-controller.on('message_received', (bot, message) => {
   bot.reply(message, 'What are you talking about? Tell me you\'re hungry and I\'ll tell you where to eat!');
 });
+// controller.on('message_received', (bot, message) => {
+//   bot.reply(message, 'What are you talking about? Tell me you\'re hungry and I\'ll tell you where to eat!');
+// });
 controller.on('outgoing_webhook', (bot, message) => {
   bot.replyPublic(message, 'yeah yeah');
   bot.reply(message, 'yeah yeah');
