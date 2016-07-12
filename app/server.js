@@ -38,32 +38,6 @@ controller.setupWebserver(process.env.PORT || 3001, (err, webserver) => {
   });
 });
 
-controller.hears(['pizzatime'], 'message_recieved', function (bot, message) {
-  askFlavor = function (response, convo) {
-    convo.ask('What flavor of pizza do you want?', function (response, convo) {
-      convo.say('Awesome.');
-      askSize(response, convo);
-      convo.next();
-    });
-  };
-  askSize = function (response, convo) {
-    convo.ask('What size do you want?', function (response, convo) {
-      convo.say('Ok.');
-      askWhereDeliver(response, convo);
-      convo.next();
-    });
-  };
-  askWhereDeliver = function (response, convo) {
-    convo.ask('So where do you want it delivered?', function (response, convo) {
-      convo.say('Ok! Good bye.');
-      convo.next();
-    });
-  };
-
-  bot.startConversation(message, askFlavor);
-});
-
-
 // response for food
 controller.hears(['hungry'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
   yelp.search({ term: 'food', location: '03755' })
