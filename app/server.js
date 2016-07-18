@@ -74,6 +74,14 @@ controller.hears(['help'], ['direct_message'], (bot, message) => {
   });
 });
 
+controller.hears(['hello world'], 'message_received', (bot, message) => {
+  // start a conversation to handle this response.
+  bot.startConversation(message, (err, convo) => {
+    convo.say('Hello!');
+    convo.say('Have a nice day!');
+  });
+});
+
 // reply to a direct mention - @bot hello
 controller.on('direct_mention', (bot, message) => {
   // reply to _message_ by using the _bot_ object
